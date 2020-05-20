@@ -27,6 +27,9 @@ DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
 
+LOGIN_URL = '/login/'
+LOGOUT_URL = "/"
+
 
 # Application definition
 
@@ -124,4 +127,4 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-# AUTH_USER_MODEL = 'tracker.Account'
+AUTH_USER_MODEL = 'tracker.Account'

@@ -76,3 +76,10 @@ class Account(AbstractBaseUser):
 
     def has_module_perms(self, app_label):
         return True
+
+
+class BugTicket(models.Model):
+    title = models.CharField(max_length=50, required=True)
+    date_filed = models.DateTimeField(auto_now_add=True)
+    description = models.TextField(required=True)
+    creator = models.ForeignKey(Account, on_delete=models.CASCADE)
