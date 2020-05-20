@@ -90,9 +90,9 @@ class BugTicket(models.Model):
         (DONE, 'Done'),
         (INVALID, 'Invalid'),
     ]
-    title = models.CharField(max_length=50, required=True)
+    title = models.CharField(max_length=50)
     date_filed = models.DateTimeField(auto_now_add=True)
-    description = models.TextField(required=True)
+    description = models.TextField()
     creator = models.ForeignKey(Account, on_delete=models.CASCADE)
     ticket_status = models.CharField(
         max_length=3,

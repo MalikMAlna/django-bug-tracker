@@ -2,12 +2,15 @@ from django.shortcuts import render, reverse, HttpResponseRedirect
 from django.contrib import messages
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
+from django.contrib.admin.views.decorators import staff_member_required
 from .forms import RegistrationForm, LoginForm, AddTicketForm
+from .models import Account, BugTicket
 
 
 @login_required
 def index(request):
-    return render(request, 'index.html')
+    tickets = BugTicket.objects.all()
+    return render(request, 'index.html', {'tickets': tickets})
 
 
 def loginview(request):
@@ -41,6 +44,8 @@ def logoutview(request):
     return HttpResponseRedirect(reverse('homepage'))
 
 
+@login_required
+@staff_member_required
 def registration_view(request):
     html = 'register.html'
     context = {}
@@ -64,3 +69,21 @@ def registration_view(request):
         form = RegistrationForm()
         context['registration_form'] = form
     return render(request, html, context)
+
+
+@login_required
+def ticketadd(request):
+    html = 'genericform.html'
+    form = AddTicketForm()
+    if request.method == "POST":
+        form = AddTicketForm(request.POST)
+        if form.is_valid():
+            data = form.cleaned_data
+            BugTicket.objects.create(
+                title=data['title'],
+                description=data['description'],
+            )
+            messages.info(request, "Ticket created successfully!")
+            return HttpResponseRedirect(reverse('homepage'))
+
+    return render(request, html, {"form": form})

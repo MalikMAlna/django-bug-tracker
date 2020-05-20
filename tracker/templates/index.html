@@ -10,3 +10,12 @@
 {% if user.is_superuser %}
   <a href="{% url 'register' %}">Create A New User</a>
 {% endif %}
+{% for ticket in tickets%}
+<li>
+<a href="/">{{ticket.title}}</a>
+</li>
+{% endfor %}
+</ul>
+<br/>
+<br/>
+<a href="{% url 'ticket-add'%}">Add A Recipe</a>

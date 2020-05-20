@@ -14,4 +14,7 @@ urlpatterns = [
     path('login/',
          views.loginview,
          name='login'),
+    path('ticket-add/',
+         views.ticketadd,
+         name='ticket-add'),
 ]
