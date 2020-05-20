@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "django-bug-tracker"
+version = "0.0.1"
+description = "A bug tracker using django"
+authors = ["Mike A. <jimalik2525@gmail.com>"]
+license = "MIT"
+
+[tool.poetry.dependencies]
+python = "^3.8"
+django = "^3.0.6"
+
+[tool.poetry.dev-dependencies]
+flake8 = "^3.8.1"
+autopep8 = "^1.5.2"
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"
