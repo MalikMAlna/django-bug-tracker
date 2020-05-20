@@ -23,3 +23,8 @@ class LoginForm(forms.Form):
         widget=forms.PasswordInput,
         help_text='*Required'
     )
+
+
+class AddTicketForm(forms.Form):
+    title = forms.CharField(max_length=50, help_text='*Required')
+    description = forms.CharField(widget=forms.Textarea, help_text='*Required')

@@ -79,7 +79,33 @@ class Account(AbstractBaseUser):
 
 
 class BugTicket(models.Model):
+    NEW = 'NEW'
+    IN_PROGRESS = 'INP'
+    DONE = 'DNE'
+    INVALID = 'INV'
+
+    TICKET_STATUS_CHOICES = [
+        (NEW, 'New'),
+        (IN_PROGRESS, 'In Progress'),
+        (DONE, 'Done'),
+        (INVALID, 'Invalid'),
+    ]
     title = models.CharField(max_length=50, required=True)
     date_filed = models.DateTimeField(auto_now_add=True)
     description = models.TextField(required=True)
     creator = models.ForeignKey(Account, on_delete=models.CASCADE)
+    ticket_status = models.CharField(
+        max_length=3,
+        choices=TICKET_STATUS_CHOICES,
+        default=NEW,
+    )
+    assigned_to = models.ForeignKey(
+        Account,
+        on_delete=models.CASCADE,
+        default=None
+    )
+    completed_by = models.ForeignKey(
+        Account,
+        on_delete=models.CASCADE,
+        default=None
+    )
