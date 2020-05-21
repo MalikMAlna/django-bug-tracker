@@ -1,5 +1,5 @@
 <h1>{{ bug_ticket.title }}</h1>
-<h3>Created By: <a href="{% url 'account-detail' bug_ticket.creator.pk %}">{{bug_ticket.creator}}</a></h3>
+<h3>Created By: <a href="{% url 'account-detail' bug_ticket.creator.pk %}">{{bug_ticket.creator.display_name}}</a></h3>
 <h5>Date Filed: {{bug_ticket.date_filed}}</h5>
 <h4>Bug Description</h4>
 <p>{{bug_ticket.description}}</p>

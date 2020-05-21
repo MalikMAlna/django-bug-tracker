@@ -78,6 +78,8 @@ class Account(AbstractBaseUser):
         return True
 
 
+# Spoke with Peter
+# about getting the model just right with assigned_to and completed_by
 class BugTicket(models.Model):
     NEW = 'NEW'
     IN_PROGRESS = 'INP'
