@@ -3,7 +3,6 @@ from django.contrib import messages
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.admin.views.decorators import staff_member_required
-from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from .forms import RegistrationForm, LoginForm, AddTicketForm
 from .models import Account, BugTicket
