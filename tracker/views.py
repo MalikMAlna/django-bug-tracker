@@ -82,6 +82,7 @@ def ticketadd(request):
             BugTicket.objects.create(
                 title=data['title'],
                 description=data['description'],
+                creator=request.user
             )
             messages.info(request, "Ticket created successfully!")
             return HttpResponseRedirect(reverse('homepage'))

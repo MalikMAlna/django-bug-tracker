@@ -93,7 +93,11 @@ class BugTicket(models.Model):
     title = models.CharField(max_length=50)
     date_filed = models.DateTimeField(auto_now_add=True)
     description = models.TextField()
-    creator = models.ForeignKey(Account, on_delete=models.CASCADE)
+    creator = models.ForeignKey(
+        Account,
+        related_name="creator",
+        on_delete=models.CASCADE
+    )
     ticket_status = models.CharField(
         max_length=3,
         choices=TICKET_STATUS_CHOICES,
@@ -101,11 +105,17 @@ class BugTicket(models.Model):
     )
     assigned_to = models.ForeignKey(
         Account,
+        related_name="assigned_to",
         on_delete=models.CASCADE,
+        null=True,
+        blank=True,
         default=None
     )
     completed_by = models.ForeignKey(
         Account,
+        related_name="completed_by",
         on_delete=models.CASCADE,
+        null=True,
+        blank=True,
         default=None
     )
