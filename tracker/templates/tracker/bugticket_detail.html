@@ -1,0 +1,14 @@
+<h1>{{ bug_ticket.title }}</h1>
+<h3>Created By: <a href="{% url 'account-detail' bug_ticket.creator.pk %}">{{bug_ticket.creator}}</a></h3>
+<h5>Date Filed: {{bug_ticket.date_filed}}</h5>
+<h4>Bug Description</h4>
+<p>{{bug_ticket.description}}</p>
+<span>
+    <h5>Ticket Status: {{bug_ticket.ticket_status}}&nbsp;&nbsp; 
+    Assigned To: {{bug_ticket.assigned_to}}&nbsp;&nbsp;
+    Completed By: {{bug_ticket.completed_by}}
+    </h5>
+</span>
+<br />
+<br />
+<a href="/">Return To The Homepage</a>

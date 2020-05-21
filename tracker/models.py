@@ -119,3 +119,6 @@ class BugTicket(models.Model):
         blank=True,
         default=None
     )
+
+    def __str__(self):
+        return self.title

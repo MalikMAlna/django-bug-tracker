@@ -1,21 +1,45 @@
 <h1>INTERNAL BUG TRACKER</h1>
 {% if user.is_authenticated %}
 <h2>Currently Logged In: {{ user.display_name }}</h2>
-<h2>{{user_model}}</h2>
   <a href="{% url 'logout' %}">Logout</a>
 {% endif %}
 <br>
 <br>
-<br>
-{% if user.is_superuser %}
-  <a href="{% url 'register' %}">Create A New User</a>
-{% endif %}
-{% for ticket in bug_tickets %}
+<h3>New Tickets</h3>
+<ul>
+{% for ticket in tickets %}
+{%if ticket.ticket_status == "NEW" %}
 <li>
-<a href="/">{{ticket.title}}</a>
+<a href="{% url 'bug-ticket-detail' ticket.pk %}">{{ticket.title}}</a>
 </li>
+{%endif%}
+{% endfor %}
+</ul>
+<h3>In Progress Tickets</h3>
+<ul>
+{% for ticket in tickets %}
+{%if ticket.ticket_status == "INP" %}
+<li>
+<a href="{% url 'bug-ticket-detail' ticket.pk %}">{{ticket.title}}</a>
+</li>
+{%endif%}
+{% endfor %}
+</ul>
+<h3>Completed Tickets</h3>
+<ul>
+{% for ticket in tickets %}
+{%if ticket.ticket_status == "DNE" %}
+<li>
+<a href="{% url 'bug-ticket-detail' ticket.pk %}">{{ticket.title}}</a>
+</li>
+{%endif%}
 {% endfor %}
 </ul>
 <br/>
 <br/>
 <a href="{% url 'ticket-add'%}">Add A Ticket</a>
+<br>
+<br>
+{% if user.is_superuser %}
+  <a href="{% url 'register' %}">Create A New User</a>
+{% endif %}

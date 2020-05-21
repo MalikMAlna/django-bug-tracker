@@ -11,12 +11,8 @@ from .models import Account, BugTicket
 
 @login_required
 def index(request):
-    return render(request, 'index.html')
-
-
-class BugTicketListView(ListView):
-    model = BugTicket
-    context_object_name = 'bug_tickets'
+    tickets = BugTicket.objects.all()
+    return render(request, 'index.html', {"tickets": tickets})
 
 
 class BugTicketDetailView(DetailView):
@@ -24,9 +20,14 @@ class BugTicketDetailView(DetailView):
     context_object_name = 'bug_ticket'
 
 
-class AuthorDetailView(DetailView):
+class AccountDetailView(DetailView):
     model = Account
     context_object_name = 'account'
+
+    def get_context_data(self, **kwargs):
+        context = super(DetailView, self).get_context_data(**kwargs)
+        context['personal_bug_tickets'] = BugTicket.objects.all()
+        return context
 
 
 def loginview(request):

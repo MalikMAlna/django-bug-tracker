@@ -1,0 +1,32 @@
+<h2>{{account}}</h2>
+<h3>Tickets Created By User</h3>
+{% for ticket in personal_bug_tickets%}
+{%if ticket.creator == account %}
+<li>
+<a href="{% url 'bug-ticket-detail' ticket.pk %}">{{ticket.title}}</a>
+</li>
+{% endif %}
+{% endfor %}
+<br />
+<br />
+<h3>Tickets Assigned To User</h3>
+{% for ticket in personal_bug_tickets%}
+{%if ticket.assigned_to == account %}
+<li>
+<a href="{% url 'bug-ticket-detail' ticket.pk %}">{{ticket.title}}</a>
+</li>
+{% endif %}
+{% endfor %}
+<br />
+<br />
+<h3>Tickets Completed By User</h3>
+{% for ticket in personal_bug_tickets%}
+{%if ticket.completed_by == account %}
+<li>
+<a href="{% url 'bug-ticket-detail' ticket.pk %}">{{ticket.title}}</a>
+</li>
+{% endif %}
+{% endfor %}
+<br />
+<br />
+<a href="/">Return To The Homepage</a>

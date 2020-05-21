@@ -1,9 +1,10 @@
 from django.contrib import admin
-from .models import Account
+from .models import Account, BugTicket
 from django.contrib.auth.admin import UserAdmin
 
 # Code Citation: https://www.youtube.com/
 # watch?v=XJU9vRARkGo&list=PLgCYzUzKIBE_dil025VAJnDjNZHHHR9mW&index=13
+admin.site.register(BugTicket)
 
 
 class AccountAdmin(UserAdmin):
