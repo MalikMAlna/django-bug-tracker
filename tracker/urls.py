@@ -23,4 +23,13 @@ urlpatterns = [
     path('ticket-add/',
          views.ticketadd,
          name='ticket-add'),
+    path(
+        'ticket/edit/<int:id>',
+        views.ticketedit,
+        name='ticket-edit'
+    ),
+    path('ticket-invalid/<int:id>',
+         views.markticketinvalid,
+         name='ticket-invalid'
+         )
 ]

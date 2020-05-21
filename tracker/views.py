@@ -104,3 +104,34 @@ def ticketadd(request):
             return HttpResponseRedirect(reverse('homepage'))
 
     return render(request, html, {"form": form})
+
+
+@login_required
+def ticketedit(request, id):
+    ticket = BugTicket.objects.get(id=id)
+    if request.method == "POST":
+        form = AddTicketForm(request.POST)
+        if form.is_valid():
+            data = form.cleaned_data
+            ticket.title = data['title']
+            ticket.description = data['description']
+            ticket.save()
+            return HttpResponseRedirect(
+                reverse('bug-ticket-detail', args=(id,))
+            )
+    form = AddTicketForm(initial={
+        'title': ticket.title,
+        'description': ticket.description,
+    })
+    return render(request, "genericform.html", {"form": form})
+
+
+@login_required
+def markticketinvalid(request, id):
+    ticket = BugTicket.objects.get(id=id)
+    if request.method == "POST":
+        ticket.ticket_status = "INV"
+        ticket.save()
+        return HttpResponseRedirect(
+            reverse('bug-ticket-detail', args=(id,))
+        )
