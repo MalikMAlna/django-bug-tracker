@@ -107,7 +107,7 @@ def ticketadd(request):
 
 
 @login_required
-def ticketedit(request, id):
+def ticket_edit(request, id):
     ticket = BugTicket.objects.get(id=id)
     if request.method == "POST":
         form = AddTicketForm(request.POST)
@@ -127,11 +127,33 @@ def ticketedit(request, id):
 
 
 @login_required
-def markticketinvalid(request, id):
+def mark_ticket_invalid(request, id):
     ticket = BugTicket.objects.get(id=id)
-    if request.method == "POST":
-        ticket.ticket_status = "INV"
-        ticket.save()
-        return HttpResponseRedirect(
-            reverse('bug-ticket-detail', args=(id,))
-        )
+    ticket.ticket_status = "INV"
+    ticket.save()
+    return HttpResponseRedirect(
+        reverse('bug-ticket-detail', args=(id,))
+    )
+
+
+@login_required
+def mark_ticket_new(request, id):
+    ticket = BugTicket.objects.get(id=id)
+    ticket.ticket_status = "NEW"
+    ticket.assigned_to = None
+    ticket.completed_by = None
+    ticket.save()
+    return HttpResponseRedirect(
+        reverse('bug-ticket-detail', args=(id,))
+    )
+
+
+@login_required
+def assign_ticket_self(request, id):
+    ticket = BugTicket.objects.get(id=id)
+    ticket.ticket_status = "INP"
+    ticket.assigned_to = request.user
+    ticket.save()
+    return HttpResponseRedirect(
+        reverse('bug-ticket-detail', args=(id,))
+    )
