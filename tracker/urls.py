@@ -3,8 +3,14 @@ from tracker import views
 
 urlpatterns = [
     path('',
-         views.index,
+         views.BugTicketListView.as_view(),
          name='homepage'),
+    path('recipes/<int:pk>',
+         views.BugTicketDetailView.as_view(),
+         name='bug-ticket-detail'),
+    path('authors/<int:pk>',
+         views.AccountDetailView.as_view(),
+         name='account-detail'),
     path('register/',
          views.registration_view,
          name='register'),

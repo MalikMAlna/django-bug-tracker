@@ -10,7 +10,7 @@
 {% if user.is_superuser %}
   <a href="{% url 'register' %}">Create A New User</a>
 {% endif %}
-{% for ticket in tickets%}
+{% for ticket in bug_tickets %}
 <li>
 <a href="/">{{ticket.title}}</a>
 </li>

@@ -3,14 +3,30 @@ from django.contrib import messages
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.admin.views.decorators import staff_member_required
+from django.views.generic.list import ListView
+from django.views.generic.detail import DetailView
 from .forms import RegistrationForm, LoginForm, AddTicketForm
 from .models import Account, BugTicket
 
 
 @login_required
 def index(request):
-    tickets = BugTicket.objects.all()
-    return render(request, 'index.html', {'tickets': tickets})
+    return render(request, 'index.html')
+
+
+class BugTicketListView(ListView):
+    model = BugTicket
+    context_object_name = 'bug_tickets'
+
+
+class BugTicketDetailView(DetailView):
+    model = BugTicket
+    context_object_name = 'bug_ticket'
+
+
+class AuthorDetailView(DetailView):
+    model = Account
+    context_object_name = 'account'
 
 
 def loginview(request):
