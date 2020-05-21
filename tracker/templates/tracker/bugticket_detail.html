@@ -12,7 +12,7 @@
 <a href="{% url 'ticket-edit' bug_ticket.id %}">Edit Ticket</a>
 <br/>
 <br/>
-{% if bug_ticket.ticket_status != "INV" %}
+{% if bug_ticket.ticket_status != "INV" or bug_ticket.ticket_status == "NEW" %}
 <a href="{% url 'ticket-invalid' bug_ticket.id %}">Mark Ticket As Invalid</a>
 {% else %}
 <a href="{% url 'ticket-new' bug_ticket.id %}">Mark Ticket As New</a>
@@ -22,7 +22,12 @@
 {% if bug_ticket.assigned_to == None %}
 <a href="{% url 'assign-ticket-self' bug_ticket.id %}">Assign Ticket To Self</a>
 {% else %}
-<a href="{% url 'ticket-new' bug_ticket.id %}">Unassign Ticket To Self</a>
+<a href="{% url 'ticket-new' bug_ticket.id %}">Unassign Ticket</a>
+{% endif %}
+{% if bug_ticket.assigned_to != None %}
+<br/>
+<br/>
+<a href="{% url 'ticket-completed' bug_ticket.id %}">Mark Ticket As Completed</a>
 {% endif %}
 <br/>
 <br/>

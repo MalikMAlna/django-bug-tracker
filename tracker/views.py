@@ -157,3 +157,14 @@ def assign_ticket_self(request, id):
     return HttpResponseRedirect(
         reverse('bug-ticket-detail', args=(id,))
     )
+
+
+@login_required
+def mark_ticket_completed(request, id):
+    ticket = BugTicket.objects.get(id=id)
+    ticket.ticket_status = "DNE"
+    ticket.completed_by = request.user
+    ticket.save()
+    return HttpResponseRedirect(
+        reverse('bug-ticket-detail', args=(id,))
+    )
