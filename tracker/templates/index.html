@@ -1,6 +1,6 @@
 <h1>INTERNAL BUG TRACKER</h1>
 {% if user.is_authenticated %}
-<h2>Currently Logged In: {{ user.display_name }}</h2>
+<h2>Currently Logged In As: {{ user.display_name }}</h2>
   <a href="{% url 'logout' %}">Logout</a>
 {% endif %}
 <br>
