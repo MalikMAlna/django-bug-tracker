@@ -130,6 +130,8 @@ def ticket_edit(request, id):
 def mark_ticket_invalid(request, id):
     ticket = BugTicket.objects.get(id=id)
     ticket.ticket_status = "INV"
+    ticket.assigned_to = None
+    ticket.completed_by = None
     ticket.save()
     return HttpResponseRedirect(
         reverse('bug-ticket-detail', args=(id,))
@@ -164,6 +166,7 @@ def mark_ticket_completed(request, id):
     ticket = BugTicket.objects.get(id=id)
     ticket.ticket_status = "DNE"
     ticket.completed_by = request.user
+    ticket.assigned_to = None
     ticket.save()
     return HttpResponseRedirect(
         reverse('bug-ticket-detail', args=(id,))

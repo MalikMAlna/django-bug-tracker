@@ -4,9 +4,27 @@
 <h4>Bug Description</h4>
 <p>{{bug_ticket.description}}</p>
 <span>
-    <h5>Ticket Status: {{bug_ticket.ticket_status}}&nbsp;&nbsp; 
-    Assigned To: {{bug_ticket.assigned_to.display_name}}&nbsp;&nbsp;
-    Completed By: {{bug_ticket.completed_by.display_name}}
+    <h5>{%if bug_ticket.ticket_status == "NEW"%}
+            Ticket Status: New
+        {% elif bug_ticket.ticket_status == "INV"%}
+            Ticket Status: Invalid
+        {% elif bug_ticket.ticket_status == "INP"%}
+            Ticket Status: In Progress
+        {% elif bug_ticket.ticket_status == "DNE"%}
+            Ticket Status: Done 
+        {% else %}
+            Ticket Status: None 
+        {%endif%}&nbsp;&nbsp; 
+        {% if  bug_ticket.assigned_to != None %}
+            Assigned To: {{bug_ticket.assigned_to.display_name}}
+        {% else %}
+            Assigned To: None
+        {% endif %}&nbsp;&nbsp;
+        {% if  bug_ticket.completed_by != None%}
+            Completed By: {{bug_ticket.completed_by.display_name}}
+        {% else %}
+            Completed By: None
+        {% endif %}
     </h5>
 </span>
 <a href="{% url 'ticket-edit' bug_ticket.id %}">Edit Ticket</a>
